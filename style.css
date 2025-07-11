@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: #4169E1;
     min-height: 100vh;
     color: #333;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 header {
-    background: rgba(255, 255, 255, 0.95);
+    background-color: #000000;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -39,7 +39,7 @@ nav {
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    background: linear-gradient(45deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #4169E1, #4b78ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -53,7 +53,7 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: #4169E1;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
@@ -172,6 +172,28 @@ main {
 .card p {
     line-height: 1.6;
     color: #555;
+}
+
+.social-media-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fb-page {
+    width: 33%;
+    min-width: 100px;
+}
+
+.instagram-embed {
+    width: 35%;
+    min-width: 100px;
+}
+
+.tagembed-widget {
+    width: 28%;
+    min-width: 100px;
 }
 
 .admin-panel {
