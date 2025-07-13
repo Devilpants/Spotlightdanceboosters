@@ -1,5 +1,0 @@
-TITLE: Hero Test
-SUBTITLE: Testing what this does.
-
-TITLE: Second Supporter
-SUBTITLE: Testing This Function.
