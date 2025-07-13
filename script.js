@@ -1,42 +1,64 @@
 // script.js
 document.addEventListener("DOMContentLoaded", function () {
   //add event listener for DOMContentLoaded, load details from files
+  fetch('data/hero.txt')
+    .then(response => response.text())
+    .then(data => updateHeroContent(data));
+  fetch('data/about.txt')
+    .then(response => response.text())
+    .then(data => updateAboutContent(data));
+  fetch('data/events.txt')
+    .then(response => response.text())
+    .then(data => updateEventsContent(data));
 });
 
-let adminOpen = false;
-
-function toggleAdmin() {
-    const panel = document.getElementById('admin-panel');
-    adminOpen = !adminOpen;
-    panel.classList.toggle('open', adminOpen);
-}
-
-function handleFileUpload(input, updateFunction) {
-    const file = input.files[0];
-    if (file && file.type === 'text/plain') {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            updateFunction(e.target.result);
-            showNotification('Content updated successfully!');
-        };
-        reader.readAsText(file);
-    } else {
-        showNotification('Please upload a .txt file', 'error');
-    }
-}
-
 function updateHeroContent(content) {
-    const lines = content.split('\n').filter(line => line.trim());
-    lines.forEach(line => {
-        if (line.startsWith('TITLE:')) {
-            document.getElementById('hero-title').textContent = line.replace('TITLE:', '').trim();
-        } else if (line.startsWith('SUBTITLE:')) {
-            document.getElementById('hero-subtitle').textContent = line.replace('SUBTITLE:', '').trim();
-        }
+    console.log('Updating hero content with:', content);
+    // Update hero section with content from hero.txt
+    const container = document.getElementById('hero-container');
+    container.innerHTML = '';
+    const heros = parseHeroContent(content);
+    heros.forEach(hero => {
+        const heroDiv = document.createElement('div');
+        heroDiv.className = 'hero-item';
+        heroDiv.innerHTML = `
+            <h3>${hero.name}</h3>
+            <p>- ${hero.message}</p>
+        `;
+        container.appendChild(heroDiv);
     });
 }
 
+function parseHeroContent(content) {
+    const heros = [];
+    const lines = content.split('\n').filter(line => line.trim());
+    let currentHero = {};
+    
+    lines.forEach(line => {
+        if (line.startsWith('NAME:')) {
+            if (currentHero.name) heros.push(currentHero);
+            currentHero = { name: line.replace('NAME:', '').trim() };
+        } else if (line.startsWith('MESSAGE:')) {
+            currentHero.message = line.replace('MESSAGE:', '').trim();
+        } else if (currentHero.message && line.trim()) {
+            currentHero.message += ' ' + line.trim();
+        }
+    });
+    
+    if (currentHero.name) heros.push(currentHero);
+    if (heros.length === 0) {
+        // If no heros found, hide the hero section
+        const heroSection = document.getElementById('heros');
+        if (heroSection) {
+            heroSection.style.display = 'none';
+        }
+    }
+    return heros;
+}
+
 function updateAboutContent(content) {
+    console.log('Updating about content with:', content);
+    // Update about section with content from about.txt
     const lines = content.split('\n').filter(line => line.trim());
     let currentSection = '';
     let currentText = '';
@@ -106,6 +128,12 @@ function parseEvents(content) {
     });
     
     if (currentEvent.date) events.push(currentEvent);
+    if (events.length === 0) {
+        // If no events found, add a placeholder
+        const placeholder = document.createElement('div');
+        placeholder.textContent = 'Check back later for upcoming events!';
+        container.appendChild(placeholder);
+    }
     return events;
 }
 

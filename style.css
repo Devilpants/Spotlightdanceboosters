@@ -84,7 +84,7 @@ main {
     padding: 2rem 0;
 }
 
-.hero {
+.home {
     text-align: center;
     padding: 4rem 0;
     background: rgba(255, 255, 255, 0.1);
@@ -94,7 +94,7 @@ main {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.hero h1 {
+.home h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     color: white;
@@ -102,7 +102,7 @@ main {
     animation: fadeInUp 1s ease;
 }
 
-.hero p {
+.home p {
     font-size: 1.3rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
@@ -277,7 +277,7 @@ main {
 }
 
 .event-description {
-    color: rgba(255, 255, 255, 0.9);
+    color: black;
     line-height: 1.5;
 }
 
@@ -297,11 +297,11 @@ main {
         display: none;
     }
     
-    .hero h1 {
+    .home h1 {
         font-size: 2.5rem;
     }
     
-    .hero p {
+    .home p {
         font-size: 1.1rem;
     }
     
@@ -443,4 +443,241 @@ main {
 @keyframes loading {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+}
+
+.header {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 255, 255, 0.1) 20px
+    );
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.content {
+    padding: 40px;
+}
+
+.sponsorship-levels {
+    display: grid;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.level {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid;
+}
+
+.level:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.level.diamond {
+    border-left-color: #e91e63;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+}
+
+.level.gold {
+    border-left-color: #ff9800;
+    background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+}
+
+.level.silver {
+    border-left-color: #607d8b;
+    background: linear-gradient(135deg, #eceff1 0%, #b0bec5 100%);
+}
+
+.level-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.level-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 24px;
+    color: white;
+}
+
+.diamond .level-icon {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+}
+
+.gold .level-icon {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.silver .level-icon {
+    background: linear-gradient(135deg, #607d8b, #455a64);
+}
+
+.level-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #333;
+}
+
+.level-amount {
+    font-size: 1.2em;
+    color: #666;
+    font-weight: 500;
+}
+
+.benefits {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.benefits li {
+    padding: 8px 0;
+    padding-left: 30px;
+    position: relative;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.donation-form {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 40px;
+    border: 2px dashed #ddd;
+}
+
+.donation-form h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.footer {
+    background: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .level {
+        padding: 20px;
+    }
+    
+    .level-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .level-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
