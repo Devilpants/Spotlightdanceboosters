@@ -1,0 +1,73 @@
+// This is the admin page for updating and managing the Spotlight Dance Boosters website content.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Spotlight Dance Boosters</title>
+    <link rel="icon" type="image/png" href="images/sdbicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Spotlight Dance Boosters - Admin</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="card">
+        <h2>Admin Dashboard</h2>
+        <p>Use this page to manage website content.</p>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 2rem;">Upload text files (.txt) to update content sections</p>
+
+        <div class="file-upload" onclick="document.getElementById('hero-file').click()">
+            <strong>Update Hero Section</strong><br>
+            <small>Upload: hero.txt</small>
+            <input type="file" id="hero-file" accept=".txt" onchange="handleFileUpload(this, updateHeroContent)">
+        </div>
+
+        <div class="file-upload" onclick="document.getElementById('about-file').click()" hidden>
+            <strong>Update About Section</strong><br>
+            <small>Upload: about.txt</small>
+            <input type="file" id="about-file" accept=".txt" onchange="handleFileUpload(this, updateAboutContent)">
+        </div>
+
+        <div class="file-upload" onclick="document.getElementById('events-file').click()">
+            <strong>Update Events</strong><br>
+            <small>Upload: events.txt</small>
+            <input type="file" id="events-file" accept=".txt" onchange="handleFileUpload(this, updateEventsContent)">
+        </div>
+
+        <div class="file-upload" onclick="document.getElementById('contact-file').click()" hidden>
+            <strong>Update Contact Info</strong><br>
+            <small>Upload: contact.txt</small>
+            <input type="file" id="contact-file" accept=".txt" onchange="handleFileUpload(this, updateContactContent)">
+        </div>
+
+        <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;">
+
+        <h4>File Format Examples:</h4>
+        <details style="margin: 1rem 0;">
+            <summary style="cursor: pointer; color: #667eea;">Hero Section Format</summary>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; font-size: 0.8rem; margin-top: 0.5rem;">NAME: Sponsor Name
+MESSAGE: Thank you for your support! Any additional message can go here.</pre>
+        </details>
+
+        <details style="margin: 1rem 0;">
+            <summary style="cursor: pointer; color: #667eea;">Events Format</summary>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; font-size: 0.8rem; margin-top: 0.5rem;">DATE: March 15, 2025
+TITLE: Event Title
+DESCRIPTION: Event description here
+
+DATE: April 2, 2025
+TITLE: Another Event
+DESCRIPTION: Another description</pre>
+        </details>
+    </main>
+</body>
+</html>
