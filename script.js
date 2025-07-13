@@ -95,7 +95,11 @@ function updateAboutSection(section, text) {
 function updateEventsContent(content) {
     const container = document.getElementById('events-container');
     const events = parseEvents(content);
-    
+    if (events.length === 0) {
+        // If no events found, add a message
+        container.innerHTML = '<p>Check back later for upcoming events!</p>';
+        return;
+    }
     container.innerHTML = '';
     events.forEach(event => {
         const eventDiv = document.createElement('div');
@@ -128,12 +132,6 @@ function parseEvents(content) {
     });
     
     if (currentEvent.date) events.push(currentEvent);
-    if (events.length === 0) {
-        // If no events found, add a placeholder
-        const placeholder = document.createElement('div');
-        placeholder.textContent = 'Check back later for upcoming events!';
-        container.appendChild(placeholder);
-    }
     return events;
 }
 
