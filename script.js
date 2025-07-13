@@ -20,10 +20,10 @@ function updateHeroContent(content) {
     const heros = parseHeroContent(content);
     heros.forEach(hero => {
         const heroDiv = document.createElement('div');
-        heroDiv.className = 'hero-item';
+        heroDiv.className = `level ${hero.level.toLowerCase()}`;
         heroDiv.innerHTML = `
             <h3>${hero.name}</h3>
-            <p>- ${hero.message}</p>
+            <p>${hero.message}</p>
         `;
         container.appendChild(heroDiv);
     });
@@ -38,6 +38,8 @@ function parseHeroContent(content) {
         if (line.startsWith('NAME:')) {
             if (currentHero.name) heros.push(currentHero);
             currentHero = { name: line.replace('NAME:', '').trim() };
+        } else if (line.startsWith('LEVEL:')) {
+            currentHero.level = line.replace('LEVEL:', '').trim(); 
         } else if (line.startsWith('MESSAGE:')) {
             currentHero.message = line.replace('MESSAGE:', '').trim();
         } else if (currentHero.message && line.trim()) {

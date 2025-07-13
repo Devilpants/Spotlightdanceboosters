@@ -517,16 +517,19 @@ main {
 .level.diamond {
     border-left-color: #e91e63;
     background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+    margin-bottom: 10px;
 }
 
 .level.gold {
     border-left-color: #ff9800;
     background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+    margin-bottom: 10px;
 }
 
 .level.silver {
     border-left-color: #607d8b;
     background: linear-gradient(135deg, #eceff1 0%, #b0bec5 100%);
+    margin-bottom: 10px;
 }
 
 .level-header {
