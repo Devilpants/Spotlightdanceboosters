@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Spotlight Dance Boosters</title>
+    <link rel="icon" type="image/png" href="images/sdbicon.png">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Spotlight Dance Boosters</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#heros">Sponsors</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#fundraising">Fundraising</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#social-media">Social Media</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbzKk1QEaHKDg43HHVxy7n1zhfqDmj1HcVY5aAPt6Py8EUrz7plzNM_hCWyz3htesLbFKw/exec";
+
+console.log("Fetching data from:", URL);
+
+fetch(URL)
+  .then(response => response.json())
+  .then(data => {
+    Object.keys(data).forEach(key => {
+        console.log(`${key}: ${data[key]}`);
+      //const body = document.getElementById('body'); 
+
+      //const el = document.getElementById(key);
+      //if (el) el.textContent = data[key];
+    });
+  });
+
+</script>
+</body>
+</html>
