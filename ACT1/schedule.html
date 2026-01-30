@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACT1 Dance Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .schedule-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .day-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .day-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .day-title .chev {
+            font-size: 18px;
+            transition: transform 0.2s ease;
+            margin-left: 8px;
+            color: #e74c3c;
+        }
+        .day-section.collapsed table {
+            display: none;
+        }
+        .day-section.collapsed .chev {
+            transform: rotate(-90deg);
+        }
+        /* Indicator for current time */
+        tr.now-pointer td {
+            background: linear-gradient(90deg, rgba(231,76,60,0.06) 0%, rgba(231,76,60,0.03) 100%);
+            border-top: 2px solid #e74c3c;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .now-marker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e74c3c;
+        }
+        .now-marker::before {
+            content: '▸';
+            display: inline-block;
+            transform: translateY(-1px);
+            font-size: 14px;
+            color: #e74c3c;
+        }
+
+        /* Sortable table headers */
+        th.sortable {
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            padding-right: 26px;
+        }
+        th.sortable .sort-indicator {
+            font-size: 12px;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        th.sortable[aria-sort="ascending"] .sort-indicator { transform: translateY(-50%) rotate(180deg); color: #e74c3c; }
+        th.sortable[aria-sort="descending"] .sort-indicator { color: #e74c3c; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>ACT1 Dance Competition Schedule</h1>
+    <div class="schedule-container">
+        <!-- Friday -->
+        <div class="day-section">
+            <div class="day-title" role="button" tabindex="0" aria-expanded="true">Friday Jan. 30th<span class="chev" aria-hidden="true">▾</span></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="sortable" data-type="number" scope="col" aria-sort="none">Entry Number <span class="sort-indicator">▴▾</span></th>
+                        <th class="sortable" data-type="time" scope="col" aria-sort="none">Time <span class="sort-indicator">▴▾</span></th>
+                        <th class="sortable" data-type="string" scope="col" aria-sort="none">Title <span class="sort-indicator">▴▾</span></th>
+                        <th class="sortable" data-type="string" scope="col" aria-sort="none">Dancer(s) <span class="sort-indicator">▴▾</span></th>
+                        <th class="sortable" data-type="string" scope="col" aria-sort="none">Div <span class="sort-indicator">▴▾</span></th>
+                        <th class="sortable" data-type="string" scope="col" aria-sort="none">Category <span class="sort-indicator">▴▾</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#8</td>
+                        <td>05:19 PM</td>
+                        <td>Hold My Hand</td>
+                        <td>Aurora Smyser</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#9</td>
+                        <td>05:22 PM</td>
+                        <td>Lovely</td>
+                        <td>Josie Schwartz</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#30</td>
+                        <td>06:20 PM</td>
+                        <td>Iris</td>
+                        <td>Alexis Gould</td>
+                        <td>Solo</td>
+                        <td>Lyrical</td>
+                    </tr>
+                    <tr>
+                        <td>#45</td>
+                        <td>07:02 PM</td>
+                        <td>Somethings Got A Hold of Me</td>
+                        <td>Ariana Shackelford</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#48</td>
+                        <td>07:10 PM</td>
+                        <td>It's My Life</td>
+                        <td>Annabella Longo</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#49</td>
+                        <td>07:13 PM</td>
+                        <td>Seven Nation Army</td>
+                        <td>Tessa Hake</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#53</td>
+                        <td>07:24 PM</td>
+                        <td>Body Language</td>
+                        <td>Brooklyn Whitney</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#57</td>
+                        <td>07:35 PM</td>
+                        <td>Cold Hearted Snake</td>
+                        <td>Brinley Cochran</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#61</td>
+                        <td>07:46 PM</td>
+                        <td>Cosmic Love</td>
+                        <td>Tessa Hake</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#64</td>
+                        <td>07:54 PM</td>
+                        <td>3 White Butterflies</td>
+                        <td>Gabriella Gonzalez</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#66</td>
+                        <td>08:00 PM</td>
+                        <td>Tragedy</td>
+                        <td>Annabella Longo</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#67</td>
+                        <td>08:03 PM</td>
+                        <td>Somebody That I Used To Know</td>
+                        <td>Stella Petty</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#68</td>
+                        <td>08:05 PM</td>
+                        <td>Darkside</td>
+                        <td>Caroline Ward</td>
+                        <td>Solo</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#83</td>
+                        <td>08:47 PM</td>
+                        <td>Whine Up</td>
+                        <td>Molly Turner</td>
+                        <td>Solo</td>
+                        <td>Hip Hop</td>
+                    </tr>
+                    <tr>
+                        <td>#104</td>
+                        <td>09:42 PM</td>
+                        <td>All For Us</td>
+                        <td>-</td>
+                        <td>Duo/Trio</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#106</td>
+                        <td>09:48 PM</td>
+                        <td>When You're Gone</td>
+                        <td>-</td>
+                        <td>Duo/Trio</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#115</td>
+                        <td>10:13 PM</td>
+                        <td>Tusk</td>
+                        <td>-</td>
+                        <td>Duo/Trio</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>S1</td>
+                        <td>10:30 PM</td>
+                        <td colspan="4" style="text-align:center; font-style:italic; padding-top:10px;">Session 1 Awards</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day-section">
+            <div class="day-title" role="button" tabindex="0" aria-expanded="true">Saturday Jan 31st<span class="chev" aria-hidden="true">▾</span></div>
+            <table>
+                <thead>
+                    <th class="sortable" data-type="number" scope="col" aria-sort="none">Entry Number <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="time" scope="col" aria-sort="none">Time <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Title <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Dancer(s) <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Div <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Category <span class="sort-indicator">▴▾</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#150</td>
+                        <td>08:10 AM</td>
+                        <td>3000 Light Years</td>
+                        <td>Eva Paden</td>
+                        <td>Solo</td>
+                        <td>Lyrical</td>
+                    </tr>
+                    <tr>
+                        <td>#167</td>
+                        <td>08:57 AM</td>
+                        <td>I'm Just a Girl</td>
+                        <td>Baylor Schwartz</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#171</td>
+                        <td>09:08 AM</td>
+                        <td>What A Feeling</td>
+                        <td>Eliza Cutter</td>
+                        <td>Solo</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#210</td>
+                        <td>11:04 AM</td>
+                        <td>Looking at Me</td>
+                        <td>-</td>
+                        <td>Small Group</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>S2</td>
+                        <td>11:20 AM</td>
+                        <td colspan="4" style="text-align:center; font-style:italic; padding-top:10px;">Session 2 Awards</td>
+                    </tr>
+                    <tr>
+                        <td>#216</td>
+                        <td>12:19 PM</td>
+                        <td>The Beautiful People</td>
+                        <td>-</td>
+                        <td>Large Group</td>
+                        <td>Open</td>
+                    </tr>
+                    <tr>
+                        <td>#256</td>
+                        <td>02:20 PM</td>
+                        <td>Gravity</td>
+                        <td>-</td>
+                        <td>Large Group</td>
+                        <td>Lyrical</td>
+                    </tr>
+                    <tr>
+                        <td>S3</td>
+                        <td>4:00 PM</td>
+                        <td colspan="4" style="text-align:center; font-style:italic; padding-top:10px;">Session 3 Awards</td>
+                    </tr>
+                    <tr>
+                        <td>#278</td>
+                        <td>05:27 PM</td>
+                        <td>Por Ti</td>
+                        <td>-</td>
+                        <td>Small Group</td>
+                        <td>Pointe</td>
+                    </tr>
+                    <tr>
+                        <td>#285</td>
+                        <td>05:49 PM</td>
+                        <td>Say Something</td>
+                        <td>-</td>
+                        <td>Small Group</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#310</td>
+                        <td>07:06 PM</td>
+                        <td>Forte</td>
+                        <td>-</td>
+                        <td>Small Group</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>#321</td>
+                        <td>07:39 PM</td>
+                        <td>Love Song</td>
+                        <td>-</td>
+                        <td>Small Group</td>
+                        <td>Lyrical</td>
+                    </tr>
+                    <tr>
+                        <td>#365</td>
+                        <td>09:50 PM</td>
+                        <td>Swans</td>
+                        <td>-</td>
+                        <td>Duo/Trio</td>
+                        <td>Contemporary</td>
+                    </tr>
+                    <tr>
+                        <td>#373</td>
+                        <td>10:12 PM</td>
+                        <td>Let's Dance</td>
+                        <td>-</td>
+                        <td>Duo/Trio</td>
+                        <td>Jazz</td>
+                    </tr>
+                    <tr>
+                        <td>S4</td>
+                        <td>10:30 PM</td>
+                        <td colspan="4" style="text-align:center; font-style:italic; padding-top:10px;">Session 4 Awards</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sunday -->
+        <div class="day-section">
+            <div class="day-title" role="button" tabindex="0" aria-expanded="true">Sunday Feb 1st<span class="chev" aria-hidden="true">▾</span></div>
+            <table>
+                <thead>
+                    <th class="sortable" data-type="number" scope="col" aria-sort="none">Entry Number <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="time" scope="col" aria-sort="none">Time <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Title <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Dancer(s) <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Div <span class="sort-indicator">▴▾</span></th>
+                    <th class="sortable" data-type="string" scope="col" aria-sort="none">Category <span class="sort-indicator">▴▾</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#415</td>
+                        <td>08:15 AM</td>
+                        <td>Enjoy the Silence</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#418</td>
+                        <td>08:23 AM</td>
+                        <td>Wind it Up</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#422</td>
+                        <td>08:35 AM</td>
+                        <td>Turn the Beat Around</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#438A</td>
+                        <td>09:20 AM</td>
+                        <td>Welcome To The Jungle</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#451A</td>
+                        <td>10:04 AM</td>
+                        <td>These Boots</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#459</td>
+                        <td>10:26 AM</td>
+                        <td>Hey Mama</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#465</td>
+                        <td>10:51 AM</td>
+                        <td>Monsters Inc Reimagined</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#490</td>
+                        <td>01:33 PM</td>
+                        <td>Hallelujah</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#533</td>
+                        <td>05:51 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#551A</td>
+                        <td>06:46 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#554</td>
+                        <td>06:54 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#559</td>
+                        <td>07:08 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#604</td>
+                        <td>09:07 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#609</td>
+                        <td>09:21 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#611</td>
+                        <td>09:27 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>#621</td>
+                        <td>09:54 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    // Make day sections collapsible
+    document.querySelectorAll('.day-title').forEach(function(title){
+      title.addEventListener('click', function(){
+        var section = title.closest('.day-section');
+        var collapsed = section.classList.toggle('collapsed');
+        title.setAttribute('aria-expanded', (!collapsed).toString());
+        if (typeof updateNowPointer === 'function') updateNowPointer();
+      });
+      title.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          title.click();
+        }
+      });
+    });
+
+    // Table sorting utilities
+    function parseTimeString(t) {
+      var m = String(t).trim().match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+      if (!m) return String(t).trim().toLowerCase();
+      var hh = parseInt(m[1],10);
+      var mm = parseInt(m[2],10);
+      var ampm = m[3].toUpperCase();
+      if (ampm === 'PM' && hh !== 12) hh += 12;
+      if (ampm === 'AM' && hh === 12) hh = 0;
+      return hh*60 + mm; // minutes since midnight
+    }
+
+    function getCellValue(cell, dataType) {
+      var txt = cell ? cell.textContent.trim() : '';
+      if (dataType === 'number') {
+        var num = txt.replace(/[^0-9.-]/g,'');
+        return num === '' ? NaN : parseFloat(num);
+      } else if (dataType === 'time') {
+        return parseTimeString(txt);
+      } else {
+        return txt.toLowerCase();
+      }
+    }
+
+    document.querySelectorAll('th.sortable').forEach(function(th){
+      th.addEventListener('click', function(){
+        var table = th.closest('table');
+        var tbody = table.tBodies[0];
+        var index = Array.prototype.indexOf.call(th.parentNode.children, th);
+        var dataType = th.getAttribute('data-type') || 'string';
+        var currentSort = th.getAttribute('aria-sort') || 'none';
+        var newSort = currentSort === 'ascending' ? 'descending' : 'ascending';
+        // Clear sorts on other headers in same table
+        th.parentNode.querySelectorAll('th.sortable').forEach(function(h){ h.setAttribute('aria-sort','none'); });
+        th.setAttribute('aria-sort', newSort);
+        var rows = Array.from(tbody.rows);
+        rows.sort(function(a,b){
+          var aVal = getCellValue(a.cells[index], dataType);
+          var bVal = getCellValue(b.cells[index], dataType);
+          if (typeof aVal === 'number' && typeof bVal === 'number') {
+            if (isNaN(aVal)) return 1;
+            if (isNaN(bVal)) return -1;
+            return newSort === 'ascending' ? aVal - bVal : bVal - aVal;
+          } else {
+            if (aVal < bVal) return newSort === 'ascending' ? -1 : 1;
+            if (aVal > bVal) return newSort === 'ascending' ? 1 : -1;
+            return 0;
+          }
+        });
+        // Re-append rows in new order
+        rows.forEach(function(r){ tbody.appendChild(r); });
+        // Reposition pointer for today's table after a sort
+        if (typeof updateNowPointer === 'function') updateNowPointer();
+      });
+      th.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); th.click(); }
+      });
+    });
+
+    // Live pointer that marks current time position in today's table
+    function updateNowPointer() {
+      var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var now = new Date();
+      var todayName = dayNames[now.getDay()];
+      var title = Array.from(document.querySelectorAll('.day-title')).find(function(t){ return t.textContent.toLowerCase().indexOf(todayName.toLowerCase()) !== -1; });
+      if (!title) return;
+      var section = title.closest('.day-section');
+      // ensure visible
+      if (section.classList.contains('collapsed')) {
+        section.classList.remove('collapsed');
+        title.setAttribute('aria-expanded','true');
+      }
+      var table = section.querySelector('table');
+      if (!table) return;
+      var tbody = table.tBodies[0];
+      if (!tbody) return;
+      var ths = Array.from(table.tHead.querySelectorAll('th'));
+      var timeIndex = ths.findIndex(function(h){ return (h.getAttribute('data-type') === 'time') || (h.textContent.toLowerCase().indexOf('time') !== -1); });
+      if (timeIndex === -1) return;
+      var nowMinutes = now.getHours()*60 + now.getMinutes();
+      // remove existing pointers
+      Array.from(tbody.querySelectorAll('tr.now-pointer')).forEach(function(r){ r.remove(); });
+      var rows = Array.from(tbody.rows);
+      var insertBefore = null;
+      for (var i = 0; i < rows.length; i++) {
+        var cell = rows[i].cells[timeIndex];
+        var t = parseTimeString(cell ? cell.textContent : '');
+        if (typeof t === 'number') {
+          var timeVal = t;
+          if (timeVal > nowMinutes) { insertBefore = rows[i]; break; }
+        }
+      }
+      var cols = ths.length;
+      var pointerRow = document.createElement('tr');
+      pointerRow.className = 'now-pointer';
+      var td = document.createElement('td');
+      td.setAttribute('colspan', cols);
+      td.innerHTML = '<span class="now-marker">Now</span>';
+      pointerRow.appendChild(td);
+      if (insertBefore) {
+        tbody.insertBefore(pointerRow, insertBefore);
+      } else {
+        tbody.appendChild(pointerRow);
+      }
+    }
+
+    // Run once on load and then every 30 seconds
+    updateNowPointer();
+    setInterval(updateNowPointer, 30000);
+
+    </script>
+</body>
+</html>
