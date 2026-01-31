@@ -686,7 +686,7 @@
       if (displayHours === 0) displayHours = 12;
       var timeStr = displayHours + ':' + (adjMins < 10 ? '0' : '') + adjMins + ' ' + ampm;
       var offsetInfo = timeOffset !== 0 ? ' (' + timeStr + ')' : '';
-      td.innerHTML = '<span class="now-marker">Now' + offsetInfo + '</span>';
+      td.innerHTML = '<span class="now-marker">Performance Position - Adjusted time ' + offsetInfo + '</span>';
       pointerRow.appendChild(td);
       if (insertBefore) {
         tbody.insertBefore(pointerRow, insertBefore);
