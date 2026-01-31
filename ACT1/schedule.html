@@ -487,16 +487,16 @@
                     <tr>
                         <td>#533</td>
                         <td>05:51 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Toxic Love</td>
+                        <td>Lucy Conner</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>#551A</td>
                         <td>06:46 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Symptom of Being Human</td>
+                        <td>Karley Clark</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -504,8 +504,8 @@
                     <tr>
                         <td>#554</td>
                         <td>06:54 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Amore In Lutto</td>
+                        <td>Emma Hanson</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -513,16 +513,16 @@
                     <tr>
                         <td>#559</td>
                         <td>07:08 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>ATL</td>
+                        <td>Ava Collier</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>#604</td>
                         <td>09:07 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Angel</td>
+                        <td>Alys Grogg</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -530,16 +530,16 @@
                     <tr>
                         <td>#609</td>
                         <td>09:21 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Know Love</td>
+                        <td>Josie Prifogle</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>#611</td>
                         <td>09:27 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Is It A Crime</td>
+                        <td>Alahna Beinkemper</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -547,8 +547,8 @@
                     <tr>
                         <td>#621</td>
                         <td>09:54 PM</td>
-                        <td></td>
-                        <td></td>
+                        <td>Like a Woman</td>
+                        <td>Alys Grogg</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -559,6 +559,9 @@
     </div>
 
     <script>
+    // EDIT THIS to adjust the Now pointer (in minutes, positive = later, negative = earlier)
+    var timeOffset = 20;  // e.g., change to 15 for show running 15 min late, or -10 for 10 min early
+
     // Make day sections collapsible
     document.querySelectorAll('.day-title').forEach(function(title){
       title.addEventListener('click', function(){
@@ -654,7 +657,8 @@
       var ths = Array.from(table.tHead.querySelectorAll('th'));
       var timeIndex = ths.findIndex(function(h){ return (h.getAttribute('data-type') === 'time') || (h.textContent.toLowerCase().indexOf('time') !== -1); });
       if (timeIndex === -1) return;
-      var nowMinutes = now.getHours()*60 + now.getMinutes();
+      var now = new Date();
+      var nowMinutes = now.getHours()*60 + now.getMinutes() + timeOffset;
       // remove existing pointers
       Array.from(tbody.querySelectorAll('tr.now-pointer')).forEach(function(r){ r.remove(); });
       var rows = Array.from(tbody.rows);
@@ -672,7 +676,17 @@
       pointerRow.className = 'now-pointer';
       var td = document.createElement('td');
       td.setAttribute('colspan', cols);
-      td.innerHTML = '<span class="now-marker">Now</span>';
+      // Format and display the adjusted time
+      var adjHours = Math.floor(nowMinutes / 60);
+      var adjMins = nowMinutes % 60;
+      if (adjHours >= 24) adjHours -= 24;
+      if (adjHours < 0) adjHours += 24;
+      var ampm = adjHours >= 12 ? 'PM' : 'AM';
+      var displayHours = adjHours % 12;
+      if (displayHours === 0) displayHours = 12;
+      var timeStr = displayHours + ':' + (adjMins < 10 ? '0' : '') + adjMins + ' ' + ampm;
+      var offsetInfo = timeOffset !== 0 ? ' (' + timeStr + ')' : '';
+      td.innerHTML = '<span class="now-marker">Now' + offsetInfo + '</span>';
       pointerRow.appendChild(td);
       if (insertBefore) {
         tbody.insertBefore(pointerRow, insertBefore);
