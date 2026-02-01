@@ -645,11 +645,6 @@
       var title = Array.from(document.querySelectorAll('.day-title')).find(function(t){ return t.textContent.toLowerCase().indexOf(todayName.toLowerCase()) !== -1; });
       if (!title) return;
       var section = title.closest('.day-section');
-      // ensure visible
-      if (section.classList.contains('collapsed')) {
-        section.classList.remove('collapsed');
-        title.setAttribute('aria-expanded','true');
-      }
       var table = section.querySelector('table');
       if (!table) return;
       var tbody = table.tBodies[0];
