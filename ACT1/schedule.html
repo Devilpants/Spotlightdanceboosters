@@ -52,24 +52,51 @@
         }
         /* Indicator for current time */
         tr.now-pointer td {
-            background: linear-gradient(90deg, rgba(231,76,60,0.06) 0%, rgba(231,76,60,0.03) 100%);
-            border-top: 2px solid #e74c3c;
-            padding: 8px 12px;
+            background: rgba(255, 174, 0, 0.699);
+            border-top: 3px solid #e74c3c;
+            padding: 10px 14px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(231,76,60,0.08);
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+        tr.now-pointer {
+            animation: now-row-pop 320ms cubic-bezier(.2,.9,.2,1);
         }
         .now-marker {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: #e74c3c;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.2px;
         }
         .now-marker::before {
-            content: '▸';
+            content: '';
             display: inline-block;
-            transform: translateY(-1px);
-            font-size: 14px;
-            color: #e74c3c;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            box-shadow: 0 0 12px rgba(231,76,60,0.6);
+            margin-right: 4px;
+            animation: pulse 1600ms infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            70% { transform: scale(1.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        @keyframes now-row-pop {
+            0% { transform: translateY(-8px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .now-marker::before, tr.now-pointer { animation: none !important; }
         }
 
         /* Sortable table headers */
